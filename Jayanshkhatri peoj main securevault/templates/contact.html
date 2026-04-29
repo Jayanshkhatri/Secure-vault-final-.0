@@ -1,0 +1,245 @@
+{% extends "base.html" %}
+{% block content %}
+
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --gold:#f0a500;--amber:#f5c842;--orange:#e86210;
+  --bg:#060400;--bg2:#0d0900;--bg3:#120d00;
+  --border1:rgba(240,165,0,0.08);--border2:rgba(240,165,0,0.22);--border3:rgba(240,165,0,0.5);
+  --text1:#faf6ee;--text2:rgba(250,246,238,0.6);--text3:rgba(250,246,238,0.3);
+  --font-d:'Bebas Neue',sans-serif;--font-b:'Syne',sans-serif;--font-m:'JetBrains Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text1);font-family:var(--font-b);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── HERO ── */
+.ct-hero{
+  position:relative;padding:120px 52px 80px;
+  border-bottom:1px solid var(--border1);overflow:hidden;
+}
+.ct-hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 50% 60% at 85% 20%,rgba(240,165,0,0.06) 0%,transparent 65%),
+    radial-gradient(ellipse 40% 50% at 15% 80%,rgba(232,98,16,0.04) 0%,transparent 60%);
+  pointer-events:none;
+}
+.ct-hero-grid{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(rgba(240,165,0,0.02) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(240,165,0,0.02) 1px,transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse 90% 80% at 50% 50%,black 20%,transparent 75%);
+  pointer-events:none;
+}
+.ct-hero-inner{position:relative;z-index:1;max-width:1100px;margin:0 auto}
+.ct-eyebrow{font-family:var(--font-m);font-size:9.5px;letter-spacing:0.28em;text-transform:uppercase;color:rgba(240,165,0,0.6);margin-bottom:28px;display:flex;align-items:center;gap:12px}
+.ct-eyebrow::before{content:'';width:28px;height:1px;background:linear-gradient(90deg,var(--gold),transparent)}
+.ct-hero h1{font-family:var(--font-d);font-size:clamp(56px,9vw,110px);line-height:.86;letter-spacing:0.03em;color:var(--text1);margin-bottom:24px}
+.ct-hero h1 .grad{display:block;background:linear-gradient(110deg,var(--amber) 0%,var(--gold) 45%,var(--orange) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ct-hero-sub{font-size:15px;color:var(--text3);line-height:1.9;max-width:480px}
+
+/* ── MAIN CONTACT LAYOUT ── */
+.ct-body{padding:100px 52px;max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start}
+
+/* ── LEFT: Info ── */
+.ct-info-label{font-family:var(--font-m);font-size:9px;letter-spacing:0.24em;text-transform:uppercase;color:rgba(240,165,0,0.5);margin-bottom:12px}
+.ct-info-h2{font-family:var(--font-d);font-size:clamp(36px,4vw,60px);letter-spacing:0.04em;color:var(--text1);line-height:.92;margin-bottom:24px}
+.ct-info-text{font-size:13.5px;color:var(--text3);line-height:1.9;margin-bottom:40px;border-left:2px solid rgba(240,165,0,0.2);padding-left:20px}
+.ct-channels{display:flex;flex-direction:column;gap:10px}
+.ct-channel{display:flex;align-items:center;gap:16px;padding:18px 20px;background:rgba(240,165,0,0.03);border:1px solid var(--border1);border-radius:12px;text-decoration:none;transition:all .25s;cursor:default}
+.ct-channel:hover{border-color:var(--border2);background:rgba(240,165,0,0.06);transform:translateX(6px)}
+.ct-channel-icon{width:40px;height:40px;border-radius:10px;background:rgba(240,165,0,0.08);border:1px solid rgba(240,165,0,0.18);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.ct-channel-body{flex:1}
+.ct-channel-label{font-family:var(--font-m);font-size:8.5px;letter-spacing:0.18em;text-transform:uppercase;color:rgba(240,165,0,0.5);margin-bottom:3px}
+.ct-channel-val{font-size:13px;font-weight:600;color:var(--text2)}
+.ct-status{display:flex;align-items:center;gap:6px;margin-top:28px;font-family:var(--font-m);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(240,165,0,0.45)}
+.ct-status-dot{width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.2}}
+
+/* ── RIGHT: Form ── */
+.ct-form{background:rgba(13,9,0,0.8);border:1px solid var(--border1);border-radius:20px;padding:44px 36px;position:relative;overflow:hidden}
+.ct-form::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),var(--amber),transparent)}
+.ct-form-title{font-family:var(--font-d);font-size:28px;letter-spacing:0.06em;color:var(--text1);margin-bottom:6px}
+.ct-form-sub{font-family:var(--font-m);font-size:9px;letter-spacing:0.16em;text-transform:uppercase;color:rgba(240,165,0,0.4);margin-bottom:32px}
+.ct-field{margin-bottom:18px}
+.ct-field label{display:block;font-family:var(--font-m);font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;color:rgba(240,165,0,0.45);margin-bottom:7px}
+.ct-field input,.ct-field textarea,.ct-field select{
+  width:100%;background:rgba(240,165,0,0.03);border:1px solid var(--border1);
+  border-radius:8px;padding:13px 16px;font-size:13px;color:var(--text2);
+  font-family:var(--font-b);outline:none;transition:border-color .2s,background .2s;
+}
+.ct-field input::placeholder,.ct-field textarea::placeholder{color:rgba(250,246,238,0.18)}
+.ct-field input:focus,.ct-field textarea:focus,.ct-field select:focus{border-color:rgba(240,165,0,0.45);background:rgba(240,165,0,0.04)}
+.ct-field select{appearance:none;cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(240,165,0,0.4)'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+.ct-field select option{background:#0d0900;color:var(--text2)}
+.ct-field textarea{min-height:140px;resize:vertical;font-family:var(--font-b)}
+.ct-fields-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ct-submit{width:100%;padding:15px;border-radius:8px;background:linear-gradient(120deg,var(--amber),var(--gold),var(--orange));background-size:200%;border:none;color:#060400;font-family:var(--font-b);font-size:12px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;cursor:pointer;transition:background-position .4s,transform .15s,box-shadow .2s;box-shadow:0 8px 28px rgba(240,165,0,0.25);margin-top:8px}
+.ct-submit:hover{background-position:100%;transform:translateY(-2px);box-shadow:0 14px 40px rgba(240,165,0,0.45)}
+.ct-privacy{font-family:var(--font-m);font-size:8px;letter-spacing:0.1em;color:rgba(250,246,238,0.2);text-align:center;margin-top:14px}
+
+/* ── FAQ STRIP ── */
+.ct-faq{background:var(--bg2);border-top:1px solid var(--border1);padding:80px 52px}
+.ct-faq-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:start}
+.ct-faq-label{font-family:var(--font-d);font-size:clamp(40px,5vw,70px);letter-spacing:0.04em;color:var(--text1);line-height:.9}
+.faq-grid{display:flex;flex-direction:column;gap:8px}
+.faq-item{background:rgba(16,13,0,0.9);border:1px solid var(--border1);border-radius:12px;padding:20px 22px;cursor:pointer;transition:border-color .22s}
+.faq-item:hover,.faq-item.open{border-color:rgba(240,165,0,0.28)}
+.faq-q{font-size:13.5px;font-weight:600;color:var(--text1);display:flex;justify-content:space-between;align-items:center;gap:16px}
+.faq-t{width:24px;height:24px;border-radius:50%;border:1px solid rgba(240,165,0,0.2);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:13px;flex-shrink:0;transition:transform .28s,background .22s}
+.faq-item.open .faq-t{transform:rotate(45deg);background:rgba(240,165,0,0.1)}
+.faq-a{font-size:13px;color:var(--text2);line-height:1.85;max-height:0;overflow:hidden;transition:max-height .35s ease,padding-top .22s}
+.faq-item.open .faq-a{max-height:180px;padding-top:12px}
+
+/* ── REVEAL ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.show{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){
+  .ct-hero,.ct-faq{padding-left:20px;padding-right:20px}
+  .ct-body{grid-template-columns:1fr;gap:40px;padding:60px 20px}
+  .ct-faq-inner{grid-template-columns:1fr;gap:32px}
+  .ct-fields-row{grid-template-columns:1fr}
+  .ct-form{padding:28px 20px}
+}
+</style>
+
+<!-- HERO -->
+<section class="ct-hero">
+  <div class="ct-hero-bg"></div>
+  <div class="ct-hero-grid"></div>
+  <div class="ct-hero-inner">
+    <div class="ct-eyebrow reveal">Secure Communication</div>
+    <h1 class="reveal">GET IN<br><span class="grad">CONTACT.</span></h1>
+    <p class="ct-hero-sub reveal">Reach out to the SecureVault team. All queries are encrypted in transit. All transmissions verified by algorithm.</p>
+  </div>
+</section>
+
+<!-- BODY -->
+<div class="ct-body">
+  <!-- LEFT: Info -->
+  <div>
+    <div class="ct-info-label reveal">Direct Channels</div>
+    <h2 class="ct-info-h2 reveal">Talk to<br>the Builders.</h2>
+    <p class="ct-info-text reveal">We're four cybersecurity students who built this from scratch. Whether you have a question about the cryptography, a bug report, or a collaboration idea — we read everything.</p>
+    <div class="ct-channels">
+      <div class="ct-channel reveal">
+        <div class="ct-channel-icon">📧</div>
+        <div class="ct-channel-body">
+          <div class="ct-channel-label">Primary Email</div>
+          <div class="ct-channel-val">securevault@project.dev</div>
+        </div>
+      </div>
+      <div class="ct-channel reveal">
+        <div class="ct-channel-icon">🔐</div>
+        <div class="ct-channel-body">
+          <div class="ct-channel-label">Encrypted Line</div>
+          <div class="ct-channel-val">PGP Key available on request</div>
+        </div>
+      </div>
+      <div class="ct-channel reveal">
+        <div class="ct-channel-icon">💻</div>
+        <div class="ct-channel-body">
+          <div class="ct-channel-label">GitHub</div>
+          <div class="ct-channel-val">github.com/securevault</div>
+        </div>
+      </div>
+    </div>
+    <div class="ct-status reveal">
+      <div class="ct-status-dot"></div>
+      System Online · Queries Accepted
+    </div>
+  </div>
+
+  <!-- RIGHT: Form -->
+  <form class="ct-form reveal" onsubmit="handleSubmit(event)">
+    <div class="ct-form-title">TRANSMIT</div>
+    <div class="ct-form-sub">Secure Message · Encrypted in Transit</div>
+    <div class="ct-fields-row">
+      <div class="ct-field">
+        <label>Full Name</label>
+        <input type="text" placeholder="Jane Smith" required>
+      </div>
+      <div class="ct-field">
+        <label>Email Address</label>
+        <input type="email" placeholder="jane@example.com" required>
+      </div>
+    </div>
+    <div class="ct-field">
+      <label>Subject</label>
+      <select>
+        <option value="">Select query type...</option>
+        <option>Cryptography Question</option>
+        <option>Bug Report</option>
+        <option>Collaboration Inquiry</option>
+        <option>Feature Request</option>
+        <option>General Inquiry</option>
+      </select>
+    </div>
+    <div class="ct-field">
+      <label>Message</label>
+      <textarea placeholder="Describe your query in detail..." required></textarea>
+    </div>
+    <button type="submit" class="ct-submit">Transmit Securely →</button>
+    <div class="ct-privacy">🔒 This form is transmitted over TLS · No data stored in plaintext</div>
+  </form>
+</div>
+
+<!-- FAQ -->
+<section class="ct-faq">
+  <div class="ct-faq-inner">
+    <div>
+      <div class="ct-eyebrow reveal">Common Queries</div>
+      <div class="ct-faq-label reveal">FAQ<br>VAULT</div>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item reveal">
+        <div class="faq-q">What response time should I expect?<div class="faq-t">+</div></div>
+        <div class="faq-a">We typically respond within 24–48 hours. For urgent cryptographic issues or security vulnerabilities, please flag your message as high priority in the subject field.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Can I contribute to SecureVault?<div class="faq-t">+</div></div>
+        <div class="faq-a">Absolutely. SecureVault is a student project and we welcome code reviews, cryptographic feedback, and collaboration from the security community. Reach out with your GitHub handle.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">Is there a public API?<div class="faq-t">+</div></div>
+        <div class="faq-a">Not yet. We're considering a public encryption API endpoint for future releases. Contact us if you're interested in early access or testing partnerships.</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q">I found a security bug — what should I do?<div class="faq-t">+</div></div>
+        <div class="faq-a">Please report it responsibly via email with full reproduction steps. We take all vulnerability disclosures seriously and will acknowledge reports within 12 hours.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('show')})},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>{
+  const r=el.getBoundingClientRect();
+  if(r.top<window.innerHeight)el.classList.add('show');
+  else obs.observe(el);
+});
+
+document.querySelectorAll('.faq-item').forEach(item=>{
+  item.addEventListener('click',()=>{
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(f=>f.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  });
+});
+
+function handleSubmit(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.ct-submit');
+  btn.textContent='✓ Transmitted';
+  btn.style.background='linear-gradient(120deg,#32b464,#28a050)';
+  setTimeout(()=>{btn.textContent='Transmit Securely →';btn.style.background='';e.target.reset()},3000);
+}
+</script>
+
+{% endblock %} 
